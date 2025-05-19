@@ -1,7 +1,9 @@
-Proyecto AgentIASeven
-Un pipeline end-to-end para extraer datos contables desde SQL Server, analizarlos con CrewAI y entregar un informe financiero generado por IA.
+# Proyecto AgentIASeven
 
-¿Qué hace?
+Un pipeline end-to-end para extraer datos contables desde SQL Server, analizarlos con CrewAI y 
+entregar un informe financiero generado por IA.
+
+**¿Qué hace?**
 
 1. Extracción
 
@@ -51,17 +53,17 @@ AgentIASenven/
 
 ***Instalación rápida***
 
-# 1. Crear entorno (ejemplo con conda)
+1. Crear entorno (ejemplo con conda)
 conda create -n AgentIASeven python=3.11
 conda activate AgentIASeven
 
-# 2. Instalar dependencias
+2. Instalar dependencias
 pip install -r requirements.txt
 
-# 3. Configurar variables
+3. Configurar variables
 cp .env.example .env              # Rellena con servidor, usuario, etc.
 
-# 4. Ejecutar
+4. Ejecutar
 python src/main.py
 
 
