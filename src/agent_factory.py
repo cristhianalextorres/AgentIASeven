@@ -53,7 +53,7 @@ class AgentFactory:
             groq_api_key=os.environ["GROQ_API_KEY"],
             temperature=self.temperature,
             max_completion_tokens=1024,
-            top_p=0.9,
+            top_p=0.1,
             stream=False,
             model_name="groq/llama-3.3-70b-versatile"
         )

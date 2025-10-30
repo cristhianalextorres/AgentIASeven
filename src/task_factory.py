@@ -51,7 +51,7 @@ class TaskFactory:
         #    • input         : datos a analizar (string).
         return Task(
             description=self.description,
-            expected_output=plantilla,
+            expected_output='Resultados de análisis',
             agent=self.agent,
             input=self.resumen_datos
         )

@@ -16,16 +16,16 @@ import pandas as pd          # Usamos pandas para manipular/leer datos tabulares
 # Si prefieres refrescar la información directamente desde la BD SQL,
 # descomenta este bloque.  El DataLoader leerá ‘qry.sql’, ejecutará la consulta
 # y guardará el resultado en un .csv para evitar golpear la BD cada vez.
-"""
-query = "..\\data\\qry.sql"                           # Ruta del archivo con la consulta.
+
+""" query = "..\\data\\qry.sql"                           # Ruta del archivo con la consulta.
 extraccion = DataLoader(query)                        # Instancia DataLoader.
 df_load = extraccion.load_data_from_sql()             # Ejecuta la consulta y devuelve DataFrame.
-df_load.to_csv('..\\data\\data.csv', index=False)     # Persistimos el resultado localmente.
-"""
+df_load.to_csv('..\\data\\data.csv', index=False)     # Persistimos el resultado localmente. """
+
 # ------------------------------------------------------------------------------
 # CARGA DEL DATAFRAME DESDE CSV (ruta relativa al proyecto)
 # ------------------------------------------------------------------------------
-df = pd.read_csv('..\\data\\data.csv')
+df = pd.read_csv('..\\data\\dataSalud.csv')
 
 # ------------------------------------------------------------------------------
 # RESUMEN ESTADÍSTICO DEL DATAFRAME
@@ -41,9 +41,13 @@ resumen_datos = df.describe(include='all').to_string()
 #   backstory   : contexto o background que alimenta la personalidad del agente.
 #   temperature : creatividad/cautela del modelo (0=determinista, 1=creativo).
 Agent = AgentFactory(
-    role="Analista contable",
-    goal="Responder preguntas sobre los saldos contables usando datos proporcionados",
-    backstory="Especialista financiero con experiencia en análisis de datos contables de empresas.",
+    role="Analista de Vigilancia en Salud Pública",
+    goal="Detectar alertas tempranas en pacientes a partir de datos clínicos y criterios normativos definidos por el Ministerio de Salud, generando recomendaciones para garantizar el cumplimiento oportuno de las actividades de Protección Específica, Detección Temprana y aplicación de las Guías de Atención Integral (GATIS).",
+    backstory=(""" 
+        Especialista en salud pública con experiencia en análisis normativo, epidemiológico y vigilancia clínica.
+        Ha trabajado con EPS e IPS en la implementación de sistemas de información en salud y en el seguimiento al cumplimiento normativo.
+        Está entrenado para interpretar resoluciones del Ministerio de Salud y adaptar los análisis de datos clínicos a los anexos técnicos vigentes.
+        """),
     temperature=0.1
 ).create_accounting_agent()   # La fábrica devuelve una instancia crewai.Agent
 
@@ -54,7 +58,10 @@ Agent = AgentFactory(
 # agent         : el agente que ejecutará la tarea.
 # resumen_datos : input con la estadística descriptiva de las cuentas.
 task = TaskFactory(
-    description="Analiza el siguiente resumen de datos y responde: ¿Elabora una balance y recomienda qué oportunidades hay?",
+    description=(
+        "Analiza el siguiente resumen de datos clínicos y normativos y responde: "
+        "¿Qué alertas tempranas se pueden identificar y qué recomendaciones se deben emitir para mejorar el cumplimiento de las actividades de detección temprana y protección específica?"
+            ),
     agent=Agent,
     resumen_datos=resumen_datos,
 ).create_task()               # Devuelve una instancia crewai.Task
